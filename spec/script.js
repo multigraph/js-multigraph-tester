@@ -2,6 +2,10 @@
     var refreshButtonHandler = function () {
         var mugl = $(".js-multigraph-tester-textarea").val();
         var div  = $(".js-multigraph-tester-graph")[0];
+        var width = $("div.js-multigraph-tester-option input[name='width']").val();
+        var height = $("div.js-multigraph-tester-option input[name='height']").val();
+        var driver = $("div.js-multigraph-tester-option select option").filter(":selected").val();
+
         var messageHandler = {
             "error" : function (e) {throw e;},
             "warning" : function (e) {throw e;}
@@ -10,10 +14,12 @@
         var options = {
             "muglString" : mugl,
             "div" : div,
-            "driver" : "raphael"
+            "driver" : driver
         }
 
-        $(div).empty();
+        $(div).css("width", width + "px")
+            .css("height", height + "px")
+            .empty();
         window.multigraph.create(options);
     };
 
