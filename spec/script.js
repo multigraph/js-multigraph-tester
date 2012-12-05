@@ -19,6 +19,7 @@
 
         $(div).css("width", width + "px")
             .css("height", height + "px")
+            .css("borderWidth", "0px")
             .empty();
         window.multigraph.create(options);
     };
