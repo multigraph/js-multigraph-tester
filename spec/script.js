@@ -8,11 +8,6 @@
         var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
         var driver = $(parent).find("div.js-multigraph-tester-option select option").filter(":selected").val();
 
-        var messageHandler = {
-            "error" : function (e) {throw e;},
-            "warning" : function (e) {throw e;}
-        };
-
         var options = {
             "muglString" : mugl,
             "div" : div,
