@@ -1,10 +1,12 @@
 (function ($) {
-    var refreshButtonHandler = function () {
-        var mugl = $(".js-multigraph-tester-textarea").val();
-        var div  = $(".js-multigraph-tester-graph")[0];
-        var width = $("div.js-multigraph-tester-option input[name='width']").val();
-        var height = $("div.js-multigraph-tester-option input[name='height']").val();
-        var driver = $("div.js-multigraph-tester-option select option").filter(":selected").val();
+    var refreshButtonHandler = function (event) {
+        var parent = event.data.parent;
+
+        var mugl = $(parent).find(".js-multigraph-tester-textarea").val();
+        var div  = $(parent).find(".js-multigraph-tester-graph")[0];
+        var width = $(parent).find("div.js-multigraph-tester-option input[name='width']").val();
+        var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
+        var driver = $(parent).find("div.js-multigraph-tester-option select option").filter(":selected").val();
 
         var messageHandler = {
             "error" : function (e) {throw e;},
@@ -26,7 +28,7 @@
 
     $.fn.jsMultigraphTester = function () {
         var button = $(this).find("input[type='button']");
-        button.click(refreshButtonHandler);
+        button.click({"parent" : this}, refreshButtonHandler);
     }
 
     $(document).ready(function () {
