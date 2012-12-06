@@ -1,8 +1,9 @@
 (function ($) {
     var refreshButtonHandler = function (event) {
-        var parent = event.data.parent;
+        var parent = event.data.parent,
+            editor = event.data.editor;
 
-        var mugl = $(parent).find(".js-multigraph-tester-textarea").val();
+        var mugl = editor.getValue();
         var div  = $(parent).find(".js-multigraph-tester-graph")[0];
         var width = $(parent).find("div.js-multigraph-tester-option input[name='width']").val();
         var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
@@ -24,7 +25,7 @@
     var generateHTML = function () {
         var htmlStrings = [
             '<div class="js-multigraph-tester-mugl">',
-            '<textarea class="js-multigraph-tester-textarea" spellcheck="false"></textarea>',
+            '<div class="js-multigraph-tester-textarea"></div>',
             '</div>',
             '<div class="js-multigraph-tester-display">',
             '<div class="js-multigraph-tester-graph"></div>',
@@ -59,10 +60,19 @@
         return htmlStrings.join('');
     };
 
+    var generateAceEditor = function (element) {
+        var editor = ace.edit(element);
+        editor.setTheme("ace/theme/textmate");
+        editor.getSession().setMode("ace/mode/xml");
+        editor.getSession().setUseWrapMode(true);
+        return editor;
+    };
+
     $.fn.jsMultigraphTester = function () {
         $(this).html(generateHTML());
+        var editor = generateAceEditor($(this).find("div.js-multigraph-tester-textarea")[0])
         var button = $(this).find("input[type='button']");
-        button.click({"parent" : this}, refreshButtonHandler);
+        button.click({"parent" : this, "editor" : editor}, refreshButtonHandler);
     }
 
     $(document).ready(function () {
