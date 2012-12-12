@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../lib/js-multigraph/build/multigraph.js"></script>
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <link href="caroline.css" type="text/css" rel="stylesheet" media="screen"/>
+    <script type="text/javascript">
+      $ = jQuery = window.multigraph.jQuery;
+
+      $(document).ready(function () {
+        var editor = ace.edit($("#foobar")[0]);
+        editor.setTheme("ace/theme/textmate");
+        editor.getSession().setMode("ace/mode/xml");
+        editor.getSession().setUseWrapMode(true);
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <div class="js-multigraph-tester">
+      <div class="js-multigraph-tester-mugl">
+        <div class="js-multigraph-tester-textarea" id="foobar"></div>
+      </div>
+      <div class="js-multigraph-tester-display">
+        <div class="js-multigraph-tester-graph"></div>
+        <br/>
+        <div class="js-multigraph-tester-options">
+          <div class="js-multigraph-tester-option">
+            Renderer
+            <br/>
+            <select>
+              <option value="canvas">Canvas</option>
+              <option value="raphael">Raphael</option>
+            </select>
+          </div>
+          <div class="js-multigraph-tester-option">
+            Width
+            <br/>
+            <input type="text" name="width" placeholder="800"/>
+          </div>
+          <div class="js-multigraph-tester-option">
+            Height
+            <br/>
+            <input type="text" name="height" placeholder="500"/>
+          </div>
+          <div class="js-multigraph-tester-option">
+            <br/>
+            <input type="button" value="refresh"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
