@@ -24,6 +24,7 @@
 
     var generateHTML = function () {
         var htmlStrings = [
+            '<div class="js-multigraph-tester">',
             '<div class="js-multigraph-tester-mugl">',
             '<div class="js-multigraph-tester-textarea"></div>',
             '</div>',
@@ -54,6 +55,7 @@
             '<input type="button" value="refresh"/>',
             '</div>',
             '</div>',
+            '</div>',
             '</div>'
         ];
 
@@ -68,17 +70,26 @@
         return editor;
     };
 
-    $.fn.jsMultigraphTester = function () {
-        $(this).html(generateHTML());
-        var editor = generateAceEditor($(this).find("div.js-multigraph-tester-textarea")[0])
-        var button = $(this).find("input[type='button']");
-        button.click({"parent" : this, "editor" : editor}, refreshButtonHandler);
+    var methods = {
+        init : function () {
+            $(this).html(generateHTML());
+            var editor = generateAceEditor($(this).find("div.js-multigraph-tester-textarea")[0])
+            var button = $(this).find("input[type='button']");
+            button.click({"parent" : this, "editor" : editor}, refreshButtonHandler);
+        }
+    };
+
+    $.fn.jsMultigraphTester = function (method) {
+        if ( methods[method] ) {
+            return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === 'object' || ! method ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( 'Method ' +  method + ' does not exist on jQuery.dashboard' );
+            return null;
+        } 
+
     }
-
-    $(document).ready(function () {
-        $(".js-multigraph-tester").jsMultigraphTester();
-    });
-
     
 })(window.multigraph.jQuery);
 
