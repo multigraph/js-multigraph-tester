@@ -85,7 +85,7 @@
         } else if ( typeof method === 'object' || ! method ) {
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.dashboard' );
+            $.error( 'Method ' +  method + ' does not exist on jQuery.jsMultigraphTester' );
             return null;
         } 
 
