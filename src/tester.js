@@ -25,9 +25,12 @@
     var generateHTML = function () {
         var htmlStrings = [
             '<div class="js-multigraph-tester">',
+            '<div class="js-multigraph-tester-left">',
             '<div class="js-multigraph-tester-mugl">',
             '<div class="js-multigraph-tester-textarea"></div>',
             '</div>',
+            '</div>',
+            '<div class="js-multigraph-tester-right">',
             '<div class="js-multigraph-tester-display">',
             '<div class="js-multigraph-tester-graph"></div>',
             '<br/>',
@@ -53,6 +56,7 @@
             '<div class="js-multigraph-tester-option">',
             '<br/>',
             '<input type="button" value="refresh"/>',
+            '</div>',
             '</div>',
             '</div>',
             '</div>',
