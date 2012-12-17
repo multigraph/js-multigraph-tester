@@ -1,9 +1,8 @@
 (function ($) {
     var refreshButtonHandler = function (event) {
-        var parent = event.data.parent,
-            editor = event.data.editor;
+        var parent = event.data.parent;
 
-        var mugl = editor.getValue();
+        var mugl = $(parent).find("textarea").val();
         var div  = $(parent).find(".js-multigraph-tester-graph")[0];
         var width = $(parent).find("div.js-multigraph-tester-option input[name='width']").val();
         var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
@@ -13,7 +12,7 @@
             "muglString" : mugl,
             "div" : div,
             "driver" : driver
-        }
+        };
 
         $(div).css("width", width + "px")
             .css("height", height + "px")
@@ -27,7 +26,7 @@
             '<div class="js-multigraph-tester">',
             '<div class="js-multigraph-tester-left">',
             '<div class="js-multigraph-tester-mugl">',
-            '<div class="js-multigraph-tester-textarea"></div>',
+            '<textarea class="js-multigraph-tester-textarea"></textarea>',
             '</div>',
             '</div>',
             '<div class="js-multigraph-tester-right">',
@@ -66,20 +65,11 @@
         return htmlStrings.join('');
     };
 
-    var generateAceEditor = function (element) {
-        var editor = ace.edit(element);
-        editor.setTheme("ace/theme/textmate");
-        editor.getSession().setMode("ace/mode/xml");
-        editor.getSession().setUseWrapMode(true);
-        return editor;
-    };
-
     var methods = {
         init : function () {
             $(this).html(generateHTML());
-            var editor = generateAceEditor($(this).find("div.js-multigraph-tester-textarea")[0])
             var button = $(this).find("input[type='button']");
-            button.click({"parent" : this, "editor" : editor}, refreshButtonHandler);
+            button.click({"parent" : this}, refreshButtonHandler);
         }
     };
 
@@ -91,8 +81,7 @@
         } else {
             $.error( 'Method ' +  method + ' does not exist on jQuery.jsMultigraphTester' );
             return null;
-        } 
-
+        }
     }
     
 })(window.multigraph.jQuery);
