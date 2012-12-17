@@ -8,14 +8,21 @@
         var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
         var driver = $(parent).find("div.js-multigraph-tester-option select option").filter(":selected").val();
 
+        if (!width || isNaN(parseFloat(width)) || parseFloat(width) < 100) {
+            width = 800;
+        }
+        if (!height || isNaN(parseFloat(height)) || parseFloat(height) < 100) {
+            height = 500;
+        }
+
         var options = {
             "muglString" : mugl,
             "div" : div,
             "driver" : driver
         };
 
-        $(div).css("width", width + "px")
-            .css("height", height + "px")
+        $(div).css("width", parseFloat(width) + "px")
+            .css("height", parseFloat(height) + "px")
             .css("borderWidth", "0px")
             .empty();
         window.multigraph.create(options);
