@@ -55,6 +55,16 @@
     border: 1px solid black;
     overflow: auto;
 }
+
+.js-multigraph-tester-graph-message {
+    width: 500px;
+    text-align: center;
+    height: auto;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .js-multigraph-tester-options {
     position: relative;
     bottom: 0px;

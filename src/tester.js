@@ -17,9 +17,20 @@
 
         var options = {
             "muglString" : mugl,
-            "div" : div,
-            "driver" : driver
+            "div" : div
         };
+
+        if (driver !== "auto") {
+            options.driver = driver;
+        }
+
+        try {
+            $.parseXML(mugl);
+        } catch (e) {
+            $(div).empty().append($('<div class="js-multigraph-tester-graph-message">'
+                                    + 'The MUGL is not valid XML; please try again.</div>'));
+            return;
+        }
 
         $(div).css("width", parseFloat(width) + "px")
             .css("height", parseFloat(height) + "px")
@@ -32,18 +43,25 @@
                       + '<div class="js-multigraph-tester">'
                       +   '<div class="js-multigraph-tester-left">'
                       +     '<div class="js-multigraph-tester-mugl">'
+                      +       'Insert MUGL here:'
                       +       '<textarea class="js-multigraph-tester-textarea"></textarea>'
                       +     '</div>'
                       +   '</div>'
                       +   '<div class="js-multigraph-tester-right">'
                       +     '<div class="js-multigraph-tester-display">'
-                      +       '<div class="js-multigraph-tester-graph"></div>'
+                      +       '<div class="js-multigraph-tester-graph">'
+                      +         '<div class="js-multigraph-tester-graph-message">'
+                      +           'Type or paste a MUGL document in the text area to the left, and '
+                      +           'then click the "refresh" button below to see the graph here.'
+                      +         '</div>'
+                      +       '</div>'
                       +       '<br/>'
                       +       '<div class="js-multigraph-tester-options">'
                       +         '<div class="js-multigraph-tester-option">'
-                      +           'Renderer'
+                      +           'Graphics Driver'
                       +           '<br/>'
                       +           '<select>'
+                      +             '<option value="auto" selected="true">Auto</option>'
                       +             '<option value="canvas">Canvas</option>'
                       +             '<option value="raphael">Raphael</option>'
                       +           '</select>'
