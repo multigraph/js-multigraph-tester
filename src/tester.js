@@ -28,53 +28,49 @@
         window.multigraph.create(options);
     };
 
-    var generateHTML = function () {
-        var htmlStrings = [
-            '<div class="js-multigraph-tester">',
-            '<div class="js-multigraph-tester-left">',
-            '<div class="js-multigraph-tester-mugl">',
-            '<textarea class="js-multigraph-tester-textarea"></textarea>',
-            '</div>',
-            '</div>',
-            '<div class="js-multigraph-tester-right">',
-            '<div class="js-multigraph-tester-display">',
-            '<div class="js-multigraph-tester-graph"></div>',
-            '<br/>',
-            '<div class="js-multigraph-tester-options">',
-            '<div class="js-multigraph-tester-option">',
-            'Renderer',
-            '<br/>',
-            '<select>',
-            '<option value="canvas">Canvas</option>',
-            '<option value="raphael">Raphael</option>',
-            '</select>',
-            '</div>',
-            '<div class="js-multigraph-tester-option">',
-            'Width',
-            '<br/>',
-            '<input type="text" name="width" placeholder="800"/>',
-            '</div>',
-            '<div class="js-multigraph-tester-option">',
-            'Height',
-            '<br/>',
-            '<input type="text" name="height" placeholder="500"/>',
-            '</div>',
-            '<div class="js-multigraph-tester-option">',
-            '<br/>',
-            '<input type="button" value="refresh"/>',
-            '</div>',
-            '</div>',
-            '</div>',
-            '</div>',
-            '</div>'
-        ];
-
-        return htmlStrings.join('');
-    };
+    var testerHTML = (''
+                      + '<div class="js-multigraph-tester">'
+                      +   '<div class="js-multigraph-tester-left">'
+                      +     '<div class="js-multigraph-tester-mugl">'
+                      +       '<textarea class="js-multigraph-tester-textarea"></textarea>'
+                      +     '</div>'
+                      +   '</div>'
+                      +   '<div class="js-multigraph-tester-right">'
+                      +     '<div class="js-multigraph-tester-display">'
+                      +       '<div class="js-multigraph-tester-graph"></div>'
+                      +       '<br/>'
+                      +       '<div class="js-multigraph-tester-options">'
+                      +         '<div class="js-multigraph-tester-option">'
+                      +           'Renderer'
+                      +           '<br/>'
+                      +           '<select>'
+                      +             '<option value="canvas">Canvas</option>'
+                      +             '<option value="raphael">Raphael</option>'
+                      +           '</select>'
+                      +         '</div>'
+                      +         '<div class="js-multigraph-tester-option">'
+                      +           'Width'
+                      +           '<br/>'
+                      +           '<input type="text" name="width" placeholder="800"/>'
+                      +         '</div>'
+                      +         '<div class="js-multigraph-tester-option">'
+                      +           'Height'
+                      +           '<br/>'
+                      +           '<input type="text" name="height" placeholder="500"/>'
+                      +         '</div>'
+                      +         '<div class="js-multigraph-tester-option">'
+                      +           '<br/>'
+                      +           '<input type="button" value="refresh"/>'
+                      +         '</div>'
+                      +       '</div>'
+                      +     '</div>'
+                      +   '</div>'
+                      + '</div>'
+                     );
 
     var methods = {
         init : function () {
-            $(this).html(generateHTML());
+            $(this).html(testerHTML);
             var button = $(this).find("input[type='button']");
             button.click({"parent" : this}, refreshButtonHandler);
         }
