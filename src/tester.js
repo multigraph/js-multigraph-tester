@@ -1,44 +1,4 @@
 (function ($) {
-    var refreshButtonHandler = function (event) {
-        var parent = event.data.parent;
-
-        var mugl = $(parent).find("textarea").val();
-        var div  = $(parent).find(".js-multigraph-tester-graph")[0];
-        var width = $(parent).find("div.js-multigraph-tester-option input[name='width']").val();
-        var height = $(parent).find("div.js-multigraph-tester-option input[name='height']").val();
-        var driver = $(parent).find("div.js-multigraph-tester-option select option").filter(":selected").val();
-
-        if (!width || isNaN(parseFloat(width)) || parseFloat(width) < 100) {
-            width = 800;
-        }
-        if (!height || isNaN(parseFloat(height)) || parseFloat(height) < 100) {
-            height = 500;
-        }
-
-        var options = {
-            "muglString" : mugl,
-            "div" : div
-        };
-
-        if (driver !== "auto") {
-            options.driver = driver;
-        }
-
-        try {
-            $.parseXML(mugl);
-        } catch (e) {
-            $(div).empty().append($('<div class="js-multigraph-tester-graph-message">'
-                                    + 'The MUGL is not valid XML; please try again.</div>'));
-            return;
-        }
-
-        $(div).css("width", parseFloat(width) + "px")
-            .css("height", parseFloat(height) + "px")
-            .css("borderWidth", "0px")
-            .empty();
-        window.multigraph.create(options);
-    };
-
     var testerHTML = (''
                       + '<div class="js-multigraph-tester">'
                       +   '<div class="js-multigraph-tester-left">'
@@ -88,12 +48,52 @@
 
     var methods = {
         init : function () {
+            var that = this;
             $(this).html(testerHTML);
-            var button = $(this).find("input[type='button']");
-            button.click({"parent" : this}, refreshButtonHandler);
+            $(this).find("input[type='button']").click(function() {
+                methods.refresh.call(that);
+            });
+        },
+        refresh : function () {
+            var mugl = $(this).find("textarea").val();
+            var div  = $(this).find(".js-multigraph-tester-graph")[0];
+            var width = $(this).find("div.js-multigraph-tester-option input[name='width']").val();
+            var height = $(this).find("div.js-multigraph-tester-option input[name='height']").val();
+            var driver = $(this).find("div.js-multigraph-tester-option select option").filter(":selected").val();
+            
+            if (!width || isNaN(parseFloat(width)) || parseFloat(width) < 100) {
+                width = 800;
+            }
+            if (!height || isNaN(parseFloat(height)) || parseFloat(height) < 100) {
+                height = 500;
+            }
+            
+            var options = {
+                "muglString" : mugl,
+                "div" : div
+            };
+            
+            if (driver !== "auto") {
+                options.driver = driver;
+            }
+            
+            try {
+                $.parseXML(mugl);
+            } catch (e) {
+                $(div).empty().append($('<div class="js-multigraph-tester-graph-message">'
+                                        + 'The MUGL is not valid XML; please try again.</div>'));
+                return;
+            }
+            
+            $(div).css("width", parseFloat(width) + "px")
+                .css("height", parseFloat(height) + "px")
+                .css("borderWidth", "0px")
+                .empty();
+            window.multigraph.create(options);
         }
+        
     };
-
+    
     $.fn.jsMultigraphTester = function (method) {
         if ( methods[method] ) {
             return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
