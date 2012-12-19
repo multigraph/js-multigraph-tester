@@ -54,6 +54,11 @@
                 methods.refresh.call(that);
             });
         },
+        setMugl : function(mugl) {
+            var that = this;
+            $(this).find("textarea").val(mugl);
+            methods.refresh.call(that);
+        },
         refresh : function () {
             var mugl = $(this).find("textarea").val();
             var div  = $(this).find(".js-multigraph-tester-graph")[0];

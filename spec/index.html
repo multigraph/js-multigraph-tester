@@ -7,8 +7,32 @@
     <script type="text/javascript">
       $ = jQuery = window.multigraph.jQuery;
 
+      urlParams = function() {
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1),
+            params = {};
+
+          while (match = search.exec(query)) {
+            params[decode(match[1])] = decode(match[2]);
+          }
+          return params;
+      };
+
       $(document).ready(function () {
           $("#location").jsMultigraphTester();
+
+          var params = urlParams();
+          if (params.muglurl) {
+            $.ajax({ url      : params.muglurl,
+                     dataType : "text",
+                     success  : function(data) {
+                       $("#location").jsMultigraphTester('setMugl', data);
+                   }});
+          }
+
       });
     </script>
   </head>
