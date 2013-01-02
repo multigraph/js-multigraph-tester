@@ -39,6 +39,7 @@
 	display:block;
 	float:left;
 	position:relative;
+    overflow: hidden;
 }
 
 
@@ -47,13 +48,13 @@
     float: left;
     width: 100%;
     padding: auto;
-    overflow: auto;
+    overflow: hidden;
 }
 .js-multigraph-tester-graph {
     width: 800px;
     height:500px;
     border: 1px solid black;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .js-multigraph-tester-graph-message {
