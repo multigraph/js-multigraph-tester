@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="../lib/js-multigraph/build/multigraph.js"></script>
+    <link href="../src/tester.css" type="text/css" rel="stylesheet" media="screen"/>
+    <script type="text/javascript" src="../src/tester.js"></script>
+    <script type="text/javascript">
+      $ = jQuery = window.multigraph.jQuery;
+
+      $(document).ready(function () {
+
+        function showMugl() {
+            $('#js-multigraph-tester-graph-button').removeClass("js-multigraph-tester-nav-selected");
+            $('#js-multigraph-mugl-button').addClass("js-multigraph-tester-nav-selected");
+            $('#js-multigraph-graph-div').css('display', 'none');
+            $('#js-multigraph-mugl-div').css('display', 'block');
+        }
+        function showGraph() {
+            $('#js-multigraph-mugl-button').removeClass("js-multigraph-tester-nav-selected");
+            $('#js-multigraph-tester-graph-button').addClass("js-multigraph-tester-nav-selected");
+            $('#js-multigraph-mugl-div').css('display', 'none');
+            $('#js-multigraph-graph-div').css('display', 'block');
+        }
+        $('#js-multigraph-mugl-button a').click(function(e) {
+          e.preventDefault();
+          showMugl();
+        });
+        $('#js-multigraph-tester-graph-button a').click(function(e) {
+          e.preventDefault();
+          showGraph();
+        });
+        showGraph();
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="js-multigraph-tester-nav-wrapper">
+      <div class="js-multigraph-tester-nav">
+        <span id="js-multigraph-tester-graph-button"><a href="#">Graph</a></span>
+        <span id="js-multigraph-mugl-button"><a href="#">MUGL</a></span>
+      </div>
+      <div class="js-multigraph-tester-content">
+        <div id="js-multigraph-mugl-div">
+          Here is the mugl.
+        </div>
+        <div id="js-multigraph-graph-div">
+          Here is the graph.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
