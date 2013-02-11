@@ -36,6 +36,7 @@
                       +       '<textarea class="js-multigraph-tester-textarea"></textarea>'
                       +     '</div>'
                       +     '<div id="js-multigraph-graph-div">'
+                      +       '<div id="js-multigraph-tester-errors"></div>'
                       +       '<div class="js-multigraph-tester-graph">'
                       +         '<div class="js-multigraph-tester-graph-message">'
                       +           'Type or paste a MUGL document in the text area on the <b>MUGL</b> tab,'
@@ -159,7 +160,15 @@
             
             var options = {
                 "muglString" : mugl,
-                "div" : div
+                "div" : div,
+                error : function(e) {
+                    $('#js-multigraph-tester-errors').append($('<div>Error: '+e.message+'</div>'));
+                },
+                warning : function (w) {
+                    // w can be either a string, or a Warning instance
+                    var message = "Warning: " + ((typeof(w) === "string") ? w : w.message);
+                    $('#js-multigraph-tester-errors').append($('<div>Warning: '+message+'</div>'));
+                }
             };
             
             if (driver !== "auto") {
@@ -173,7 +182,7 @@
                                         + 'The MUGL is not valid XML; please try again.</div>'));
                 return;
             }
-            
+            $('#js-multigraph-tester-errors').empty();
             $(div).css("width", parseFloat(width) + "px")
                 .css("height", parseFloat(height) + "px")
                 .css("borderWidth", "0px")
